@@ -16,7 +16,7 @@ from utils.thread_pool import ThreadPoolManager
 # Module imports will be dynamically loaded based on commands
 MODULES_PACKAGE = "modules"
 
-class ReconXCLI:
+class rabbitReconXCLI:
     """Main CLI handler for rabbitRecon tool"""
 
     def __init__(self):
