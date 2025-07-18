@@ -1,0 +1,5 @@
+admin
+backup
+config
+wp-login.php
+.......
