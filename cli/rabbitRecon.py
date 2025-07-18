@@ -16,7 +16,7 @@ from utils.thread_pool import ThreadPoolManager
 # Module imports will be dynamically loaded based on commands
 MODULES_PACKAGE = "modules"
 
-class rabbitReconXCLI:
+class rabbitReconCLI:
     """Main CLI handler for rabbitRecon tool"""
 
     def __init__(self):
@@ -31,7 +31,7 @@ class rabbitReconXCLI:
     def _create_parser(self) -> argparse.ArgumentParser:
         """Create the main argument parser with common options"""
         parser = argparse.ArgumentParser(
-            prog='rabbitRecon',
+            prog='rabbitRecon by Bhavesh Verma',
             description='Advanced Reconnaissance & Fuzzing Tool For Researchers And Professionals',
             epilog='For detailed module help: rabbitRecon <module> -h'
         )
@@ -97,6 +97,13 @@ class rabbitReconXCLI:
             default=2.0,
             help='Connection timeout in seconds'
         )
+        port_scan =
+        subparsers.add_parser('port-scan',
+                  help='Port Scanning Operations')
+        PortScanner.setup_parser(port_scan)
+        port_scan.set_defaults(handler=lambda
+        args: run_module(args, config)
+        )
 
         # Banner Grabbing
         banner_grab = self.subparsers.add_parser(
@@ -111,6 +118,13 @@ class rabbitReconXCLI:
             '-p', '--ports',
             required=True,
             help='Port(s) to grab banners from (comma-separated)'
+        )
+        banner_grab =
+            subparsers.add_parser('banner',
+             help='Service banner grabbing')
+            BannerGrabber.setup_parser(banner_grab)
+            banner_grab.set_defaults(handler=lambda
+            args: run_module(args, config)
         )
 
         # DNS Enumeration
@@ -132,6 +146,12 @@ class rabbitReconXCLI:
             action='store_true',
             help='Enable subdomain bruteforcing'
         )
+        dns_enum =
+        subparsers.add_parser('dns', help='DNS enumeration operations')
+        DNSEnumeration.setup_parser(dns_enum)
+        dns_enum.set_defaults(handler=lambda
+        args: run_module(args, config)
+        )
 
         # HTTP Fuzzing
         http_fuzz = self.subparsers.add_parser(
@@ -151,6 +171,13 @@ class rabbitReconXCLI:
             '-H', '--headers',
             action='append',
             help='Additional headers (format: "Header: Value")'
+        )
+        http_fuzz =
+         subparsers.add_parser('fuzz',
+         help='HTTP fuzzing operations')
+         HTTPFuzzerModule.setup_parser(http_fuzz)
+         http_fuzz.set_defaults(handler=lambda
+         args: run_module(args, config)
         )
 
     def _setup_logging(self, verbosity: int):
