@@ -180,6 +180,15 @@ class rabbitReconCLI:
          args: run_module(args, config)
         )
 
+        #Web Application FireWall detection
+        waf_detect=
+        subparsers.add_parser('waf_detect',
+        help='WAF detection')
+        WAFDetector.parser.setup_parser(waf_detect)
+        waf_detect.set_defaults(handler=lambda
+        args: run_module(args, config)
+        )
+
     def _setup_logging(self, verbosity: int):
         """Configure logging based on verbosity level"""
         log_level = logging.WARNING
