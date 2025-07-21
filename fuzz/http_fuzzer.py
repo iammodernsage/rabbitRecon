@@ -173,6 +173,15 @@ class HTTPFuzzer:
             'interesting_strings': []
         }
 
+        # WAF detection
+        if self.config.get('detect_waf'):
+          waf_detector =
+        WAFDetector(self.config)
+          waf_results =
+        waf_detector.detect_waf(base_url)
+          if waf_results:
+              logger.warning(f"WAF detected: {waf_results[0].vendor}")
+
         # Detect common error patterns
         error_indicators = [
             'error', 'exception', 'stack trace', 'syntax error',
