@@ -1,0 +1,88 @@
+{
+  "services": {
+    "http": {
+      "signatures": [
+        {
+          "pattern": "Server: Apache/([\\d.]+)",
+          "name": "Apache HTTP Server",
+          "version": "$1",
+          "confidence": 90
+        },
+        {
+          "pattern": "Server: nginx/([\\d.]+)",
+          "name": "nginx",
+          "version": "$1",
+          "confidence": 90
+        },
+        {
+          "pattern": "Microsoft-IIS/([\\d.]+)",
+          "name": "Microsoft IIS",
+          "version": "$1",
+          "confidence": 95
+        }
+      ]
+    },
+    "ssh": {
+      "signatures": [
+        {
+          "pattern": "SSH-([\\d.]+)-OpenSSH_([\\d.]+)",
+          "name": "OpenSSH",
+          "version": "$2",
+          "confidence": 99
+        },
+        {
+          "pattern": "SSH-([\\d.]+)-Dropbear_([\\d.]+)",
+          "name": "Dropbear SSH",
+          "version": "$2",
+          "confidence": 95
+        }
+      ]
+    },
+    "ftp": {
+      "signatures": [
+        {
+          "pattern": "220 (.+) FTP server \\(Version ([\\d.]+)\\) ready",
+          "name": "Generic FTP Server",
+          "version": "$2",
+          "confidence": 80
+        },
+        {
+          "pattern": "220 ProFTPD ([\\d.]+) Server",
+          "name": "ProFTPD",
+          "version": "$1",
+          "confidence": 95
+        }
+      ]
+    },
+    "waf": {
+      "signatures": [
+        {
+          "pattern": "cloudflare-nginx",
+          "name": "Cloudflare",
+          "confidence": 90
+        },
+        {
+          "pattern": "AkamaiGHost",
+          "name": "Akamai",
+          "confidence": 90
+        }
+      ]
+    }
+  },
+  "vulnerabilities": {
+    "Apache": [
+      {
+        "version_range": "<2.4.49",
+        "cve": "CVE-2021-41773",
+        "description": "Path traversal vulnerability"
+      }
+    ],
+    "OpenSSH": [
+      {
+        "version_range": "<8.3",
+        "cve": "CVE-2020-15778",
+        "description": "Command injection vulnerability"
+      }
+    ]
+  }
+}
