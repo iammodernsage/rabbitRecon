@@ -1,0 +1,18 @@
+=== rabbitRecon Report ===
+Generated: {{ now().strftime('%Y-%m-%d %H:%M:%S') }}
+
+{% for section, content in data.items() %}
+[{{ section }}]
+{% if content is mapping %}
+{% for key, value in content.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% elif content is sequence %}
+{% for item in content %}
+- {{ item }}
+{% endfor %}
+{% else %}
+{{ content }}
+{% endif %}
+
+{% endfor %}

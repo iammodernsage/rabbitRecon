@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>rabbitRecon Report - {{ generated_at.strftime('%Y-%m-%d') }}</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; }
+        .section { margin-bottom: 2em; }
+        .finding { padding: 1em; border: 1px solid #eee; margin-bottom: 1em; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <h1>rabbitRecon Report</h1>
+    <p>Generated at {{ generated_at }}</p>
+    
+    {% for section, content in data.items() %}
+    <div class="section">
+        <h2>{{ section }}</h2>
+        {% if content is mapping %}
+            <table>
+                {% for key, value in content.items() %}
+                <tr>
+                    <th>{{ key }}</th>
+                    <td>
+                        {% if value is mapping or value is sequence %}
+                            <pre>{{ value|tojson(indent=2) }}</pre>
+                        {% else %}
+                            {{ value }}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% elif content is sequence %}
+            <ul>
+                {% for item in content %}
+                <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>{{ content }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</body>
+</html>

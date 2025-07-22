@@ -1,0 +1,24 @@
+{% if 'status' in data %}
+[{{ data.status|upper }}] {{ data.get('target', data.get('url', data.get('domain', ''))) }}
+{% endif %}
+
+{% if 'results' in data %}
+RESULTS:
+{% for key, value in data.results.items() %}
+- {{ key }}: 
+  {% if value is mapping %}
+    {% for k, v in value.items() %}
+      {{ k }}: {{ v }}
+    {% endfor %}
+  {% else %}
+    {{ value }}
+  {% endif %}
+{% endfor %}
+{% endif %}
+
+{% if 'stats' in data %}
+STATISTICS:
+{% for key, value in data.stats.items() %}
+- {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
