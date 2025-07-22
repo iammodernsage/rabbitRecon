@@ -79,10 +79,10 @@ lint:
 
 # Build the shared library for Python integration
 libreconx.so: core/scanner.o core/socket_utils.o
-    $(CC) -shared -o $@ $^ -lpthread
+	$(CC) -shared -o $@ $^ -lpthread
 
 core/scanner.o: core/scanner.c core/scanner.h core/socket_utils.h
-    $(CC) -c -fPIC -o $@ $<
+	$(CC) -c -fPIC -o $@ $<
 
 core/socket_utils.o: core/socket_utils.c core/socket_utils.h
-    $(CC) -c -fPIC -o $@ $<
+	$(CC) -c -fPIC -o $@ $<

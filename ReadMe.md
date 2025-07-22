@@ -10,7 +10,7 @@ This tool is developed to enhance speed, flexibility, and extensibility; for the
 - Fast TCP/UDP port scanning (SYN, ACK, NULL, etc.)
 - Banner Grabbing and Service Detection
 - DNS Enumeration and Brute Forcing
-- Passive Recon
+- Passive Recon (WIP)
 - HTTP Fuzzing (paths, headers, params)
 - Report Generation
 - Multi Threaded/Asynchronous scanning
