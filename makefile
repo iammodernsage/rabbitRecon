@@ -21,9 +21,9 @@ TESTS_DIR = $(SRC_DIR)/tests
 all: build
 
 # Build C core components
-build: $(CORE_DIR)/libreconx.so
+build: $(CORE_DIR)/librabbitRecon.so
 
-$(CORE_DIR)/libreconx.so: $(CORE_DIR)/scanner.o $(CORE_DIR)/socket_utils.o
+$(CORE_DIR)/librabbitRecon.so: $(CORE_DIR)/scanner.o $(CORE_DIR)/socket_utils.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
 $(CORE_DIR)/scanner.o: $(CORE_DIR)/scanner.c $(CORE_DIR)/scanner.h $(CORE_DIR)/socket_utils.h
@@ -35,12 +35,12 @@ $(CORE_DIR)/socket_utils.o: $(CORE_DIR)/socket_utils.c $(CORE_DIR)/socket_utils.
 # Installation
 install: build
 	$(PIP) install -e .
-	cp $(CORE_DIR)/libreconx.so /usr/local/lib/
+	cp $(CORE_DIR)/librabbitRecon.so /usr/local/lib/
 	ldconfig
 
 uninstall:
-	$(PIP) uninstall reconx
-	rm -f /usr/local/lib/libreconx.so
+	$(PIP) uninstall rabbitRecon
+	rm -f /usr/local/lib/librabbitRecon.so
 
 # Development
 dev:
@@ -61,10 +61,10 @@ docs:
 
 # Docker
 docker-build:
-	docker build -t reconx .
+	docker build -t rabbitRecon .
 
 docker-run:
-	docker run -it reconx
+	docker run -it rabbitRecon
 
 # Formatting
 format:
@@ -78,7 +78,7 @@ lint:
 
 
 # Build the shared library for Python integration
-libreconx.so: core/scanner.o core/socket_utils.o
+librabbitRecon.so: core/scanner.o core/socket_utils.o
 	$(CC) -shared -o $@ $^ -lpthread
 
 core/scanner.o: core/scanner.c core/scanner.h core/socket_utils.h

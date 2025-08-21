@@ -4,6 +4,8 @@
 #include <netinet/ip.h>
 #include <netinet/tcp.h>
 
+#define PCKT_LEN 8192
+
 // Socket creation
 int create_raw_socket();
 int create_connect_socket();
