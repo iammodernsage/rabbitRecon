@@ -21,9 +21,7 @@ TESTS_DIR = $(SRC_DIR)/tests
 all: build
 
 # Build C core components
-build: $(CORE_DIR)/librabbitRecon.so
-
-$(CORE_DIR)/librabbitRecon.so: $(CORE_DIR)/scanner.o $(CORE_DIR)/socket_utils.o
+build: $(CORE_DIR)/librabbitRecon.so:	$(CORE_DIR)/librabbitRecon.so: $(CORE_DIR)/scanner.o $(CORE_DIR)/socket_utils.o
 	$(CC) $(LDFLAGS) -o $@ $^
 
 $(CORE_DIR)/scanner.o: $(CORE_DIR)/scanner.c $(CORE_DIR)/scanner.h $(CORE_DIR)/socket_utils.h
@@ -33,7 +31,7 @@ $(CORE_DIR)/socket_utils.o: $(CORE_DIR)/socket_utils.c $(CORE_DIR)/socket_utils.
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 # Installation
-install: build
+install:	build
 	$(PIP) install -e .
 	cp $(CORE_DIR)/librabbitRecon.so /usr/local/lib/
 	ldconfig
